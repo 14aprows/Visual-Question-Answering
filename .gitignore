@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+dataset/
+
+# Outputs
+outputs/
+runs/
+logs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
