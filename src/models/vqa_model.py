@@ -26,10 +26,12 @@ class ImageEncoder(nn.Module):
             nn.MaxPool2d(kernel_size=2),            
         )
 
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
         self.projection = nn.Linear(256, output_dim)
 
     def forward(self, image):
         features = self.cnn(image)
+        features = self.pool(features)
         features = features.flatten(1)
         features = self.projection(features)
         return features
@@ -45,8 +47,8 @@ class QuestionEncoder(nn.Module):
         )
     def forward(self, question):
         embedded = self.embedding(question)
-        output, _ = self.gru(embedded)
-        return output
+        _, hidden = self.gru(embedded)
+        return hidden[-1]
 
 class VQAModel(nn.Module):
     def __init__(
