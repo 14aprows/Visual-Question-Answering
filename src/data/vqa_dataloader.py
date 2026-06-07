@@ -28,6 +28,9 @@ def get_vqa_dataloader():
         word_to_idx=word_to_idx,
         transform=train_transform,
         max_question_len=24,
+        image_column="image_id",
+        question_column="question",
+        answer_column="answer",
     )
 
     val_dataset = VQADataset(
@@ -37,6 +40,9 @@ def get_vqa_dataloader():
         word_to_idx=word_to_idx,
         transform=val_transform,
         max_question_len=24,
+        image_column="image_id",
+        question_column="question",
+        answer_column="answer",
     )
 
     train_loader = DataLoader(
