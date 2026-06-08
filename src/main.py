@@ -89,5 +89,16 @@ def main():
             }
         )
 
+        print(
+            f"Epoch {epoch + 1}/{EPOCHS} | "
+            f"LR: {optimizer.param_groups[0]['lr']:.6f} | "
+            f"Train Loss: {train_loss:.4f} | "
+            f"Train Acc: {train_acc:.4f} | "
+            f"Val Loss: {val_loss:.4f} | "
+            f"Val Acc: {val_acc:.4f} | "
+            f"Val Top5 Acc: {val_top5_acc:.4f} | "
+            f"Best: {is_best}"
+        )
+
 if __name__ == "__main__":
     main()
