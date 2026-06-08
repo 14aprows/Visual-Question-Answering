@@ -21,6 +21,7 @@ def main():
         log_dir=LOG_DIR,
         checkpoint_dir=CHECKPOINT_DIR,
     )
+    run_paths["best_checkpoint"].parent.mkdir(parents=True, exist_ok=True)
 
     optimizer = optim.AdamW(
         model.parameters(), 
