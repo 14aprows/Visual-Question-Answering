@@ -14,9 +14,16 @@ TEST_IMAGES_LIST = DATASET_DIR / "test_images_list.txt"
 ALL_QA_PAIRS = DATASET_DIR / "all_qa_pairs.txt"
 ANSWER_SPACE = DATASET_DIR / "answer_space.txt"
 
+LOG_DIR = PROJECT_ROOT / "logs"
+CHECKPOINT_DIR = PROJECT_ROOT / "checkpoints"
+
 IMAGE_SIZE = 224
 SEED = 42
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 30
 LEARNING_RATE = 1e-4
+WEIGHT_DECAY = 1e-4
+LABEL_SMOOTHING = 0.1
+GRAD_CLIP_NORM = 1.0
+
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
