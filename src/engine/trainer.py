@@ -1,7 +1,7 @@
 import torch
 from src.metrics.vqa_metrics import AverageMeter, top_k_accuracy, accuracy
 
-def train_one_epoch(model, train_loader, criterion, optimizer, device):
+def train_one_epoch(model, train_loader, criterion, optimizer, device, grad_clip_norm=None):
     model.train()
 
     loss_meter = AverageMeter()
@@ -18,6 +18,8 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device):
         loss = criterion(logits, answers)
 
         loss.backward()
+        if grad_clip_norm is not None:
+            torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip_norm)
         optimizer.step()
 
         batch_size = images.size(0)
