@@ -8,7 +8,8 @@ dataset/
 outputs/
 runs/
 logs/
-checkpoints/
+checkpoints
+scripts/
 *.pt
 *.pth
 *.ckpt
