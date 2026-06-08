@@ -15,3 +15,14 @@ class CSVLogger:
         with self.log_path.open("a", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=self.fieldnames)
             writer.writerow({key: row.get(key) for key in self.fieldnames})
+
+def get_run_paths(run_name, log_dir, checkpoint_dir):
+    run_name = str(run_name).lower()
+    log_dir = Path(log_dir)
+    checkpoint_dir = Path(checkpoint_dir)
+
+    return {
+        "log_csv": log_dir / f"{run_name}.csv",
+        "best_checkpoint": checkpoint_dir / f"{run_name}_best.pt",
+        "last_checkpoint": checkpoint_dir / f"{run_name}_last.pt"
+    }
