@@ -2,7 +2,7 @@ import torch
 import torch.optim as optim
 from src.engine.trainer import train_one_epoch, validate_one_epoch
 from src.data.vqa_dataloader import get_vqa_dataloader
-from src.models.vqa_model import VQAModel
+from src.models.vqa_resnet_model import VQAResNetModel
 from src.configs.config import LEARNING_RATE, EPOCHS, WEIGHT_DECAY, LABEL_SMOOTHING, GRAD_CLIP_NORM, LOG_DIR, CHECKPOINT_DIR
 from src.utils.csv_logger import CSVLogger, get_run_paths
 
@@ -11,13 +11,15 @@ def main():
     print(f"Using device: {device}")
 
     train_loader, val_loader, answer_to_idx, idx_to_answer, word_to_idx, idx_to_word = get_vqa_dataloader()
-    model = VQAModel(
+    model = VQAResNetModel(
         vocab_size=len(word_to_idx),
         num_answers=len(answer_to_idx),
+        freeze_backbone=True,
+        train_last_block=True,
     ).to(device)
 
     run_paths = get_run_paths(
-        run_name="vqa_cnn_gru_baseline",
+        run_name="vqa_resnet_gru_transfer",
         log_dir=LOG_DIR,
         checkpoint_dir=CHECKPOINT_DIR,
     )
